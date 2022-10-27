@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import 'custom_painter_chart.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -10,6 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int currentProgress = 60;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +39,10 @@ class _HomePageState extends State<HomePage> {
               progressColor: Colors.deepPurple,
               backgroundColor: Colors.deepPurple.shade200,
               circularStrokeCap: CircularStrokeCap.round,
-              center: const Text('40%', style: TextStyle(fontSize: 50)),
+              center: Text(
+                '$currentProgress',
+                style: TextStyle(fontSize: 50),
+              ),
               // center: const Icon(Icons.home_work, size: 60, color: Colors.red),
             ),
             LinearPercentIndicator(
@@ -45,6 +52,17 @@ class _HomePageState extends State<HomePage> {
               percent: 1,
               progressColor: Colors.deepPurple,
               backgroundColor: Colors.deepPurple.shade200,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CustomPainterChart(),
+                  ),
+                );
+              },
+              child: Text('Paint'),
             ),
           ],
         ),
